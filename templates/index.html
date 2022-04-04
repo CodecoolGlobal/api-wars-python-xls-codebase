@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h1>{{ title }}</h1>
+        <div>
+            {% if planets.previous %}
+                <a class="btn btn-primary" href="{{ url_for('index') }}">Previous</a>
+            {% else %}
+                <a class="btn btn-primary disabled" aria-disabled="true">Previous</a>
+            {% endif %}
+            {% if planets.next %}
+                <a class="btn btn-primary" href="{{ url_for('index') }}">Next</a>
+            {% else %}
+                <a class="btn btn-primary disabled" aria-disabled="true">Next</a>
+            {% endif %}
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Diameter</th>
+                        <th scope="col">Climate</th>
+                        <th scope="col">Terrain</th>
+                        <th scope="col">Surface Water Percentage</th>
+                        <th scope="col">Population</th>
+                        <th scope="col">Residents</th>
+                        <th scope="col"></th>
+                    </tr>
+                    {% for planet in planets.results %}
+                        <tr class="align-top">
+                            <td>{{ planet.name }}</td>
+                            <td>{{ "{:,} km".format(planet.diameter | int) }}</td>
+                            <td>{{ planet.climate }}</td>
+                            <td>{{ planet.terrain }}</td>
+                            <td>{{ planet.surface_water }}{% if planet.surface_water != "unknown"%}%{% endif %}</td>
+                            <td>{% if planet.population != "unknown" %}{{ "{:,} people".format(planet.population | int) }}{% else %}{{ planet.population }}{% endif %}</td>
+                            {% if planet.residents %}
+                                <td><a class="btn btn-secondary" href="{{ url_for('index') }}">{{ planet.residents | count() }} resident(s)</td>
+                            {% else %}
+                                <td>No known residents</td>
+                            {% endif %}
+                            <td><a class="btn btn-secondary" href="{{ url_for('index') }}">Vote</a></td>
+                        </tr>
+                {% endfor %}
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock %}
