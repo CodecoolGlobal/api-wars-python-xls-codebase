@@ -7,13 +7,13 @@
     <div class="container-fluid">
         <h1>{{ title }}</h1>
         <div>
-            {% if planets.previous %}
-                <a class="btn btn-primary" href="{{ url_for('index') }}">Previous</a>
+            {% if pagination.previous %}
+                <a class="btn btn-primary" href="{{ url_for('get_next_page', page_id=pagination.previous) }}">Previous</a>
             {% else %}
                 <a class="btn btn-primary disabled" aria-disabled="true">Previous</a>
             {% endif %}
-            {% if planets.next %}
-                <a class="btn btn-primary" href="{{ url_for('index') }}">Next</a>
+            {% if pagination.next %}
+                <a class="btn btn-primary" href="{{ url_for('get_next_page', page_id=pagination.next) }}">Next</a>
             {% else %}
                 <a class="btn btn-primary disabled" aria-disabled="true">Next</a>
             {% endif %}
@@ -31,7 +31,7 @@
                         <th scope="col">Residents</th>
                         <th scope="col"></th>
                     </tr>
-                    {% for planet in planets.results %}
+                    {% for planet in planets %}
                         <tr class="align-top">
                             <td>{{ planet.name }}</td>
                             <td>{{ "{:,} km".format(planet.diameter | int) }}</td>
