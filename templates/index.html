@@ -8,12 +8,12 @@
         <h1>{{ title }}</h1>
         <div>
             {% if pagination.previous %}
-                <a class="btn btn-primary" href="{{ url_for('get_next_page', page_id=pagination.previous) }}">Previous</a>
+                <a class="btn btn-primary" href="{{ url_for('next_page', page_id=pagination.previous) }}">Previous</a>
             {% else %}
                 <a class="btn btn-primary disabled" aria-disabled="true">Previous</a>
             {% endif %}
             {% if pagination.next %}
-                <a class="btn btn-primary" href="{{ url_for('get_next_page', page_id=pagination.next) }}">Next</a>
+                <a class="btn btn-primary" href="{{ url_for('next_page', page_id=pagination.next) }}">Next</a>
             {% else %}
                 <a class="btn btn-primary disabled" aria-disabled="true">Next</a>
             {% endif %}
@@ -40,7 +40,7 @@
                             <td>{{ planet.surface_water }}{% if planet.surface_water != "unknown"%}%{% endif %}</td>
                             <td>{% if planet.population != "unknown" %}{{ "{:,} people".format(planet.population | int) }}{% else %}{{ planet.population }}{% endif %}</td>
                             {% if planet.residents %}
-                                <td><a class="btn btn-secondary" href="{{ url_for('index') }}">{{ planet.residents | count() }} resident(s)</td>
+                                <td><a class="btn btn-secondary" href="{{ url_for('residents', planet_id=planet.id) }}">{{ planet.residents | count() }} resident(s)</td>
                             {% else %}
                                 <td>No known residents</td>
                             {% endif %}

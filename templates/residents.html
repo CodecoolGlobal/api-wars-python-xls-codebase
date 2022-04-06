@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h2>Residents of {{ planet.name }}</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Height</th>
+                        <th scope="col">Mass</th>
+                        <th scope="col">Hair color</th>
+                        <th scope="col">Skin Color</th>
+                        <th scope="col">Eye color</th>
+                        <th scope="col">Birth year</th>
+                        <th scope="col">Gender</th>
+                    </tr>
+                    {% for resident in residents %}
+                        <tr class="align-top">
+                            <td>{{ resident.name }}</td>
+                            <td>{{ resident.height }}</td>
+                            <td>{{ resident.mass }}{% if resident.mass != "unknown"%} kg{% endif %}</td>
+                            <td>{{ resident.hair_color }}</td>
+                            <td>{{ resident.skin_color }}</td>
+                            <td>{{ resident.eye_color }}</td>
+                            <td>{{ resident.birth_year}}</td>
+                            <td>{{ resident.gender }}</td>
+                        </tr>
+                {% endfor %}
+                </thead>
+            </table>
+        </div>
+    </div>
+{% endblock %}
