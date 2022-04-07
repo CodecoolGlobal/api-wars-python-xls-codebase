@@ -4,25 +4,23 @@ $(function() {
         let planetId = $(event.target).data('planet_id')
         showResidents(planetId)
     })
+    $('body').prepend(modalHTML)
 });
 
 function showResidents(planetId) {
-    $('.modal').remove()
-    $('body').prepend(modalHTML)
     url = '/planet/' + planetId + '/residents'
     $.get(url, function (data) {
-        $('.modal-body').html(data);
-        title = $('.modal-body h2').html();
-        $('.modal-body h2').remove();
+        let title = $(data).find('h2').html();
+        let table = $(data).find('.table-responsive');
         $('.modal-title').html(title)
-        var myModal = new bootstrap.Modal(document.getElementById('my-modal'))
+        $('.modal-body').html(table);
+        var myModal = new bootstrap.Modal(document.getElementById('residents-modal'))
         myModal.show()
   })
 }
 
-
 modalHTML = `
-    <div id="my-modal" class="modal" tabindex="-1">
+    <div id="residents-modal" class="modal" tabindex="-1">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
