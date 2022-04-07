@@ -55,12 +55,6 @@ def generate_planet_ids(planet_data):
     return planet_data
 
 
-# def get_raw_planet(planet_id):
-#     url = '{}/{}/{}'.format(BASE_URL, PLANETS, planet_id)
-#     response = requests.get(url)
-#     return response.json()
-
-
 def get_pagination(api_response):
     if ('previous' in api_response and api_response['previous'] is not None):
         prev = urlparse(api_response['previous'])[4].split('=')[1]

@@ -19,7 +19,7 @@
             {% endif %}
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <table id="planet-table" class="table table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
@@ -40,7 +40,7 @@
                             <td>{{ planet.surface_water }}{% if planet.surface_water != "unknown"%}%{% endif %}</td>
                             <td>{% if planet.population != "unknown" %}{{ "{:,} people".format(planet.population | int) }}{% else %}{{ planet.population }}{% endif %}</td>
                             {% if planet.residents %}
-                                <td><a class="btn btn-secondary" href="{{ url_for('residents', planet_id=planet.id) }}">{{ planet.residents | count() }} resident(s)</td>
+                                <td><a class="btn btn-secondary btn-residents" data-planet_id="{{ planet.id }}" href="{{ url_for('residents', planet_id=planet.id) }}">{{ planet.residents | count() }} resident(s)</td>
                             {% else %}
                                 <td>No known residents</td>
                             {% endif %}
@@ -51,4 +51,9 @@
             </table>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <!-- Bootstrap Bundle with Popper -->
+    {{ super() }}
+    <script src="/static/js/residents.js"></script>
 {% endblock %}
