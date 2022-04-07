@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container-fluid">
         <h1>{{ title }}</h1>
-        <div>
+        <div class="pagination my-3 gap-2">
             {% if pagination.previous %}
                 <a class="btn btn-primary" href="{{ url_for('next_page', page_id=pagination.previous) }}">Previous</a>
             {% else %}
@@ -31,6 +31,8 @@
                         <th scope="col">Residents</th>
                         <th scope="col"></th>
                     </tr>
+                </thead>
+                <tbody>
                     {% for planet in planets %}
                         <tr class="align-top">
                             <td>{{ planet.name }}</td>
@@ -40,14 +42,14 @@
                             <td>{{ planet.surface_water }}{% if planet.surface_water != "unknown"%}%{% endif %}</td>
                             <td>{% if planet.population != "unknown" %}{{ "{:,} people".format(planet.population | int) }}{% else %}{{ planet.population }}{% endif %}</td>
                             {% if planet.residents %}
-                                <td><a class="btn btn-secondary btn-residents" data-planet_id="{{ planet.id }}" href="{{ url_for('residents', planet_id=planet.id) }}">{{ planet.residents | count() }} resident(s)</td>
+                                <td class="gap-2"><a class="btn btn-secondary btn-residents" data-planet_id="{{ planet.id }}" href="{{ url_for('residents', planet_id=planet.id) }}">{{ planet.residents | count() }} resident(s)</td>
                             {% else %}
                                 <td>No known residents</td>
                             {% endif %}
-                            <td><a class="btn btn-secondary" href="{{ url_for('index') }}">Vote</a></td>
+                            <td class="gap-2"><a class="btn btn-secondary" href="{{ url_for('index') }}">Vote</a></td>
                         </tr>
-                {% endfor %}
-                </thead>
+                    {% endfor %}
+                </tbody>
             </table>
         </div>
     </div>
