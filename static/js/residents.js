@@ -12,10 +12,11 @@ function init() {
 }
 
 function ajaxButtons() {
-   $('.btn-residents').on( 'click', event => {
+    $('.btn-residents').on( 'click', event => {
         event.preventDefault();
         let planetId = $(event.target).data('planet_id')
-        showResidents(planetId)
+        let planetName = $(event.target).data('planet_name')
+        showResidents(planetId, planetName)
     })
 }
 
@@ -55,15 +56,15 @@ function mobileTableCheck() {
     }
 }
 
-function showResidents(planetId) {
+function showResidents(planetId, planetName) {
     var myModal = new bootstrap.Modal(document.getElementById('residents-modal'))
+    let title = 'Residents of ' + planetName;
+    $('.modal-title').html(title)
     $('#residents-modal .modal-body').html(spinner)
     myModal.show()
     url = '/planet/' + planetId + '/residents'
     $.get(url, function (data) {
-        let title = $(data).find('h2').html();
         let table = $(data).find('.table-responsive');
-        $('.modal-title').html(title)
         $('.modal-body').html(table);
   })
 }
