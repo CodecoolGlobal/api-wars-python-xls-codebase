@@ -57,12 +57,12 @@ function mobileTableCheck() {
 }
 
 function showResidents(planetId, planetName) {
-    var myModal = new bootstrap.Modal(document.getElementById('residents-modal'))
+    let myModal = new bootstrap.Modal(document.getElementById('residents-modal'))
     let title = 'Residents of ' + planetName;
     $('.modal-title').html(title)
     $('#residents-modal .modal-body').html(spinner)
     myModal.show()
-    url = '/planet/' + planetId + '/residents'
+    let url = '/planet/' + planetId + '/residents'
     $.get(url, function (data) {
         let table = $(data).find('.table-responsive');
         $('.modal-body').html(table);
