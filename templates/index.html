@@ -4,6 +4,7 @@
     {{ super() }}
 {% endblock %}
 {% block content %}
+    {% include 'navigation.html' %}
     <div class="container-fluid">
         <h1>{{ title }}</h1>
         <div class="pagination my-3 gap-2">

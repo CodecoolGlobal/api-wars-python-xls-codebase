@@ -2,3 +2,4 @@
 #planet-table > :not(:first-child) { border-color: #dee2e6; }
 .table-bordered>:not(caption)>* { border-color: #dee2e6; }
 .no-border {border-top:0 none !important; }
+
